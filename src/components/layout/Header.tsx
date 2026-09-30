@@ -65,7 +65,9 @@ export function Header() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             <span className="text-[#6b7280]">BHOPAL, IN:</span>
-            <span className="text-[#e5e7eb]">{time ? `${time} IST` : '--:--:--'}</span>
+            <span className="text-[#e5e7eb]" suppressHydrationWarning>
+              {time ? `${time} IST` : '--:--:--'}
+            </span>
           </div>
         </div>
 

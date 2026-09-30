@@ -15,6 +15,12 @@ interface NodeDrawerProps {
 
 export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySound }) => {
   const [activeMedia, setActiveMedia] = useState<string | null>(null);
+  const [mediaError, setMediaError] = useState(false);
+
+  const handleOpenMedia = (src: string) => {
+    setMediaError(false);
+    setActiveMedia(src);
+  };
 
   if (!node) return null;
 
@@ -120,7 +126,7 @@ export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySou
                 {CREATIVE_BLUE3D.gallery.map((img) => (
                   <div
                     key={img.id}
-                    onClick={() => setActiveMedia(img.src)}
+                    onClick={() => handleOpenMedia(img.src)}
                     className="group cursor-pointer rounded bg-[#130f2b] border border-white/10 overflow-hidden hover:border-[#00d4ff] transition-all hover:scale-[1.02]"
                   >
                     <div className="relative aspect-video w-full bg-black/40">
@@ -218,7 +224,7 @@ export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySou
                       )}
                       {game.heroMedia.type === 'video' && (
                         <button
-                          onClick={() => setActiveMedia(game.heroMedia.src)}
+                          onClick={() => handleOpenMedia(game.heroMedia.src)}
                           className="pixel-btn text-[8.5px] py-1.5 px-3 bg-white/10 text-zinc-300 hover:bg-white hover:text-black"
                         >
                           CLIP ▶
@@ -246,7 +252,7 @@ export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySou
                 {CREATIVE_BLUE3D.videos.map((vid) => (
                   <div
                     key={vid.id}
-                    onClick={() => setActiveMedia(vid.src)}
+                    onClick={() => handleOpenMedia(vid.src)}
                     className="p-3 rounded bg-[#130f2b] border border-white/10 hover:border-[#fb7185] cursor-pointer transition-all hover:scale-[1.02]"
                   >
                     <div className="flex items-center justify-between mb-1.5">
@@ -279,7 +285,7 @@ export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySou
                 {CREATIVE_BLUE3D.gallery.slice(0, 4).map((img) => (
                   <div
                     key={img.id}
-                    onClick={() => setActiveMedia(img.src)}
+                    onClick={() => handleOpenMedia(img.src)}
                     className="aspect-square relative rounded bg-black/40 border border-white/10 overflow-hidden cursor-pointer hover:border-[#f472b6] transition-all hover:scale-[1.02]"
                   >
                     <Image src={img.src} alt={img.title} fill className="object-cover" sizes="25vw" />
@@ -564,12 +570,33 @@ export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySou
             </button>
             <div className="relative max-w-3xl max-h-[75vh] w-full flex items-center justify-center">
               {activeMedia.endsWith('.mp4') || activeMedia.endsWith('.mov') ? (
-                <video
-                  src={activeMedia}
-                  controls
-                  autoPlay
-                  className="max-h-[70vh] rounded border border-[#00d4ff]/40 shadow-2xl"
-                />
+                mediaError ? (
+                  <div className="flex flex-col items-center justify-center p-8 bg-[#110e28] border border-[#00d4ff]/40 rounded-xl max-w-md text-center">
+                    <div className="relative mb-3 h-12 w-12 overflow-hidden rounded-lg border border-[#00d4ff]/40 bg-black">
+                      <Image src="/brand/blue-logo.jpg" alt="Blue 3D" fill className="object-cover" />
+                    </div>
+                    <p className="font-pixel text-xs text-[#00d4ff] mb-2">ORIGINAL 4K FILM REEL</p>
+                    <p className="text-xs text-zinc-300 font-sans mb-5 leading-relaxed">
+                      Streamed directly on Instagram with full high-fidelity audio & color grade.
+                    </p>
+                    <a
+                      href="https://www.instagram.com/blue3d_/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="pixel-btn text-xs py-2 px-5 bg-[#00d4ff] text-black hover:bg-white"
+                    >
+                      WATCH ON INSTAGRAM ↗
+                    </a>
+                  </div>
+                ) : (
+                  <video
+                    src={activeMedia}
+                    controls
+                    autoPlay
+                    onError={() => setMediaError(true)}
+                    className="max-h-[70vh] rounded border border-[#00d4ff]/40 shadow-2xl"
+                  />
+                )
               ) : (
                 <div className="relative w-full h-[60vh]">
                   <Image src={activeMedia} alt="Media" fill className="object-contain" sizes="80vw" />

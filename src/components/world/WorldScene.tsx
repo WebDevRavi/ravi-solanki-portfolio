@@ -67,6 +67,53 @@ export const WorldScene: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedNode]);
 
+  // Deep-linking & back navigation via URL hashes (e.g. /#games, /#about, /#studio)
+  useEffect(() => {
+    const handleHash = () => {
+      const rawHash = window.location.hash.replace('#', '').toLowerCase();
+      if (!rawHash) return;
+
+      if (rawHash === 'intro') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (rawHash === 'studio' || rawHash === 'studio-scene') {
+        const topPos = dimensions.height * 0.72;
+        window.scrollTo({ top: topPos, behavior: 'smooth' });
+        return;
+      }
+      if (rawHash === 'contact' || rawHash === 'contact-scene') {
+        const topPos = dimensions.height * 0.81;
+        window.scrollTo({ top: topPos, behavior: 'smooth' });
+        return;
+      }
+
+      const targetNode = WORLD_NODES.find(
+        (n) =>
+          n.id.toLowerCase() === rawHash ||
+          (rawHash === 'aiml' && n.id === 'ai') ||
+          (rawHash === 'work' && n.id === 'freelance') ||
+          (rawHash === 'creative' && n.id === '3d')
+      );
+
+      if (targetNode) {
+        soundEngine.playClick();
+        setSelectedNode(targetNode);
+        const el = document.getElementById(`node-${targetNode.id}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    };
+
+    const timer = setTimeout(handleHash, 350);
+    window.addEventListener('hashchange', handleHash);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('hashchange', handleHash);
+    };
+  }, [dimensions.height]);
+
   const handleNodeSelect = (node: WorldNode) => {
     soundEngine.playClick();
     setSelectedNode(node);

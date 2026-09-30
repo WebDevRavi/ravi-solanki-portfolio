@@ -9,6 +9,7 @@ import { sound } from '@/utils/audio';
 export function Blue3DSection() {
   const [activeVideoSrc, setActiveVideoSrc] = useState('/videos/what-you-want-to-be.mov');
   const [activeVideoTitle, setActiveVideoTitle] = useState('What You Want To Be · 4K Film Vignette');
+  const [videoHasError, setVideoHasError] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [selectedLightboxImage, setSelectedLightboxImage] = useState<CreativeImage | null>(null);
 
@@ -25,6 +26,7 @@ export function Blue3DSection() {
   const handleTrackChange = (src: string, title: string) => {
     setActiveVideoSrc(src);
     setActiveVideoTitle(title);
+    setVideoHasError(false);
     sound.playClick(950, 0.03);
   };
 
@@ -103,8 +105,42 @@ export function Blue3DSection() {
               muted={isMuted}
               playsInline
               controls
-              className="h-full w-full object-cover"
+              onError={() => setVideoHasError(true)}
+              onLoadedData={() => setVideoHasError(false)}
+              className={`h-full w-full object-cover ${videoHasError ? 'hidden' : 'block'}`}
             />
+
+            {videoHasError && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#080614] p-8 text-center">
+                <div className="relative mb-4 h-16 w-16 overflow-hidden rounded-xl border border-[#FCDD0D]/40 bg-black">
+                  <Image src="/brand/blue-logo.jpg" alt="Blue 3D" fill className="object-cover" />
+                </div>
+                <h4 className="font-sans text-xl font-bold text-white sm:text-2xl">
+                  {activeVideoTitle}
+                </h4>
+                <p className="mt-2 max-w-md font-mono text-xs text-[#9ca3af]">
+                  Original 4K cinematic film reel published on Instagram. Watch the high-definition master with complete sound design and color grading directly on Ravi&apos;s channels.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-4 font-mono text-xs">
+                  <a
+                    href="https://www.instagram.com/blue3d_/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-[#FCDD0D] px-5 py-2 font-bold text-black transition-all hover:bg-white"
+                  >
+                    WATCH ON @BLUE3D_ ↗
+                  </a>
+                  <a
+                    href="https://www.instagram.com/ravi_solanki_1567/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-white transition-all hover:bg-white hover:text-black"
+                  >
+                    @RAVI_SOLANKI_1567 ↗
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Theater Controls & Channel Switcher */}

@@ -37,8 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
-      <body className="min-h-full bg-[#080614] text-[#f8fafc] selection:bg-[#00d4ff] selection:text-[#080614]">
+    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased" suppressHydrationWarning>
+      <body
+        className="min-h-full bg-[#080614] text-[#f8fafc] selection:bg-[#00d4ff] selection:text-[#080614]"
+        suppressHydrationWarning
+      >
         <CustomPixelCursor />
         {children}
       </body>
