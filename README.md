@@ -87,10 +87,9 @@ npm run start
 │   ├── components/
 │   │   ├── canvas/       # 3D & custom canvas elements
 │   │   ├── creative/     # Media lightboxes & interactive showcases
-│   │   ├── effects/      # Custom pixel cursors and atmosphere
 │   │   ├── layout/       # Navigation header & footer
 │   │   ├── sections/     # Thematic portfolio drawer views
-│   │   └── world/        # Pixel-art world engine (Studio, Clouds, Moon, Stars, Nodes)
+│   │   └── world/        # Pixel-art world engine (Studio, Clouds, Moon, Stars, Nodes, Cursors)
 │   ├── config/           # Asset definitions & layout configurations
 │   ├── data/             # Project manifests, achievements, and world graph
 │   └── utils/            # Web Audio engine and text scramble utilities
@@ -104,8 +103,9 @@ npm run start
 *Creative Developer, 3D Artist & Game Engineer*
 
 - **Brand**: Blue 3D
+- **Email**: [ravisolanki969197@gmail.com](mailto:ravisolanki969197@gmail.com)
 - **GitHub**: [@WebDevRavi](https://github.com/WebDevRavi)
-- **Instagram**: [@blue3d.in](https://instagram.com/blue3d.in)
+- **Instagram**: [@blue3d_](https://www.instagram.com/blue3d_/) · [@ravi_solanki_1567](https://www.instagram.com/ravi_solanki_1567/)
 
 ---
 

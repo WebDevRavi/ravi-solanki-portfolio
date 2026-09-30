@@ -2,6 +2,11 @@
   "name": "ravi-solanki-portfolio",
   "version": "1.0.0",
   "private": true,
+  "author": "Ravi Solanki <ravisolanki969197@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebDevRavi/ravi-solanki-portfolio.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

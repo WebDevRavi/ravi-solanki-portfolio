@@ -263,7 +263,7 @@ export const WorldScene: React.FC = () => {
         >
           <span className="text-[#00d4ff] text-xs">✉</span>
           <span className="hidden sm:inline font-silkscreen text-[9px] text-zinc-300 group-hover:text-white">
-            solankiravi1567@gmail.com
+            ravisolanki969197@gmail.com
           </span>
           <div className="w-5 h-5 flex items-center justify-center">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" shapeRendering="crispEdges">

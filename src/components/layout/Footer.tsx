@@ -19,7 +19,7 @@ export function Footer() {
             <span className="text-[#4B7BFF]">AI/ML & GAME DEVELOPMENT</span>
           </div>
           <p className="mt-1 font-mono text-[11px] text-[#6b7280]">
-            NO SLOP · VERIFIED BUILDS · 60 FPS WEBGL & WEB AUDIO RUNTIME
+            HANDCRAFTED BUILDS · 60 FPS WEBGL & WEB AUDIO RUNTIME
           </p>
         </div>
 

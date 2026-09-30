@@ -10,7 +10,7 @@ export const ContactScene: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('solankiravi1567@gmail.com');
+    navigator.clipboard.writeText('ravisolanki969197@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -18,7 +18,7 @@ export const ContactScene: React.FC = () => {
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    const mailto = `mailto:solankiravi1567@gmail.com?subject=Project Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message + '\n\nSender Email: ' + formData.email)}`;
+    const mailto = `mailto:ravisolanki969197@gmail.com?subject=Project Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message + '\n\nSender Email: ' + formData.email)}`;
     window.location.href = mailto;
     setFormSent(true);
   };
@@ -95,7 +95,7 @@ export const ContactScene: React.FC = () => {
             TRANSMISSION TERMINAL
           </span>
           <span className="font-silkscreen text-[7.5px] text-zinc-400">
-            solankiravi1567@gmail.com
+            ravisolanki969197@gmail.com
           </span>
         </div>
 

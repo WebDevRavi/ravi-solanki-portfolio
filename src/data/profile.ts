@@ -120,10 +120,10 @@ export const PROFILE_DATA: ProfileData = {
     },
     {
       name: 'Email Transmission',
-      label: 'solankiravi1567@gmail.com',
-      url: 'mailto:solankiravi1567@gmail.com',
+      label: 'ravisolanki969197@gmail.com',
+      url: 'mailto:ravisolanki969197@gmail.com',
       type: 'email',
-      handle: 'solankiravi1567@gmail.com',
+      handle: 'ravisolanki969197@gmail.com',
     },
   ],
   travelWishlist: [
