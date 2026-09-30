@@ -23,7 +23,7 @@ export interface ProfileData {
     name: string;
     label: string;
     url: string;
-    type: 'github' | 'linkedin' | 'instagram' | 'email';
+    type: 'github' | 'linkedin' | 'instagram' | 'email' | 'leetcode' | 'hackerrank';
     handle: string;
   }[];
   travelWishlist: {
@@ -117,6 +117,20 @@ export const PROFILE_DATA: ProfileData = {
       url: 'https://www.linkedin.com/in/ravi-solanki-bb2420375/',
       type: 'linkedin',
       handle: 'Ravi Solanki',
+    },
+    {
+      name: 'LeetCode',
+      label: 'leetcode.com/ravi_bana_1567',
+      url: 'https://leetcode.com/ravi_bana_1567',
+      type: 'leetcode',
+      handle: '@ravi_bana_1567',
+    },
+    {
+      name: 'HackerRank',
+      label: 'hackerrank.com/ravisolanki96911',
+      url: 'https://www.hackerrank.com/ravisolanki96911',
+      type: 'hackerrank',
+      handle: '@ravisolanki96911',
     },
     {
       name: 'Email Transmission',
