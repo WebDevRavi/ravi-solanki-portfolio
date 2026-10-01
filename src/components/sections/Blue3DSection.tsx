@@ -222,7 +222,7 @@ export function Blue3DSection() {
                 {curatedStills[0].title}
               </span>
               <span className="mt-1 font-mono text-xs text-[#FCDD0D] block">
-                {curatedStills[0].category} // CLICK TO EXPAND FULLSCREEN ⤢
+                {curatedStills[0].category} {"// CLICK TO EXPAND FULLSCREEN ⤢"}
               </span>
             </div>
           </div>

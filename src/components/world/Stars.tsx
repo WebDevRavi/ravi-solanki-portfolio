@@ -18,18 +18,20 @@ interface StarData {
   opacity: number;
 }
 
+function createRng(initialSeed = 4242) {
+  let seed = initialSeed;
+  return () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+}
+
 export const Stars: React.FC<StarProps> = ({ count = 160 }) => {
   // Deterministic starfield per Section 39
   const stars = useMemo(() => {
     const list: StarData[] = [];
     const colors = ['#ffffff', '#e0e7ff', '#bae6fd', '#ddd6fe', '#fef08a'];
-
-    // Seeded pseudo-random generator
-    let seed = 4242;
-    const random = () => {
-      seed = (seed * 9301 + 49297) % 233280;
-      return seed / 233280;
-    };
+    const random = createRng(4242);
 
     const durations = [3.5, 4.2, 5.0, 5.8, 6.4, 7.2];
 

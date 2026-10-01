@@ -1,28 +1,41 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useSyncExternalStore } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { sound } from '@/utils/audio';
+
+function subscribeReducedMotion(callback: () => void) {
+  if (typeof window === 'undefined') return () => {};
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mediaQuery.addEventListener('change', callback);
+  return () => mediaQuery.removeEventListener('change', callback);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
 
 export function Blue3DCube() {
   const groupRef = useRef<THREE.Group>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
   const innerRef = useRef<THREE.Mesh>(null);
+  const lightRef = useRef<THREE.PointLight>(null);
 
   const [hovered, setHovered] = useState(false);
   const [mode, setMode] = useState<0 | 1 | 2>(0); // 0: Solid, 1: Wireframe, 2: Kinetic
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
   const { invalidate } = useThree();
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
 
   // Pointer position in normalized coordinates
   const targetRotation = useRef({ x: 0.4, y: 0.5 });
@@ -77,6 +90,10 @@ export function Blue3DCube() {
     const scale = hovered ? 1.12 : 1.0;
     groupRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.08);
 
+    if (lightRef.current) {
+      lightRef.current.position.set(lightPos.current.x, lightPos.current.y, 3);
+    }
+
     invalidate();
   });
 
@@ -91,7 +108,7 @@ export function Blue3DCube() {
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 8, 6]} intensity={2.0} color="#ffffff" />
       <directionalLight position={[-5, -4, -3]} intensity={1.2} color="#4B7BFF" />
-      <pointLight position={[lightPos.current.x, lightPos.current.y, 3]} intensity={2.5} color="#FCDD0D" distance={8} />
+      <pointLight ref={lightRef} position={[0, 0, 3]} intensity={2.5} color="#FCDD0D" distance={8} />
 
       <group
         ref={groupRef}

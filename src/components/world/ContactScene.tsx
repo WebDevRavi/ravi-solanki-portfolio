@@ -58,43 +58,43 @@ export const ContactScene: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Heading & Subtitle (Section 30 & 31) */}
+      {/* 2. Heading & Subtitle */}
       <h2 className="font-pixel text-lg md:text-2xl text-white tracking-wider mb-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
         LET’S MAKE SOMETHING.
       </h2>
 
-      <p className="font-silkscreen text-[11px] text-[#00d4ff] mb-6 tracking-wide">
-        TRANSMISSION &amp; COMMUNICATION CHANNELS
+      <p className="font-mono text-xs text-[#00d4ff] mb-6 tracking-wider">
+        SEND A MESSAGE · COLLABORATE · GET IN TOUCH
       </p>
 
-      {/* 3. Verified Social Links (Section 30: GitHub, Blue 3D IG, Personal IG, LinkedIn, Email) */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8 w-full max-w-md">
+      {/* 3. Verified Social Links */}
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-8 w-full max-w-md">
         {PROFILE_DATA.socials.map((social) => (
           <a
             key={social.name}
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="pixel-btn text-[8.5px] bg-[#080618] hover:bg-[#00d4ff] hover:text-black border border-[#00d4ff]/40 shadow-[0_0_8px_rgba(0,212,255,0.15)]"
+            className="pixel-btn text-[8.5px] bg-[#080618] hover:bg-[#00d4ff] hover:text-black border border-[#00d4ff]/40 shadow-[0_0_8px_rgba(0,212,255,0.15)] transition-all hover:scale-105"
           >
             {social.name}
           </a>
         ))}
         <button
           onClick={handleCopyEmail}
-          className="pixel-btn text-[8.5px] bg-[#080618] hover:bg-[#fbbf24] hover:text-black border border-[#fbbf24]/50 text-[#fbbf24]"
+          className="pixel-btn text-[8.5px] bg-[#080618] hover:bg-[#fbbf24] hover:text-black border border-[#fbbf24]/50 text-[#fbbf24] transition-all hover:scale-105"
         >
           {copied ? '✓ COPIED' : 'COPY EMAIL'}
         </button>
       </div>
 
-      {/* 4. Transmission Form (NAME/HANDLE, EMAIL, MESSAGE -> TRANSMIT TO RAVI) */}
-      <div className="w-full max-w-md p-5 rounded-lg bg-[#070518]/95 border border-[#00d4ff]/30 shadow-[0_0_24px_rgba(0,0,0,0.85)] text-left">
+      {/* 4. Transmission Form */}
+      <div className="w-full max-w-md p-5 rounded-xl bg-[#070518]/95 border border-[#00d4ff]/30 shadow-[0_0_24px_rgba(0,0,0,0.85)] text-left">
         <div className="flex items-center justify-between pb-2.5 mb-3.5 border-b border-white/10">
           <span className="font-pixel text-[8px] text-[#00d4ff] tracking-wider">
-            TRANSMISSION TERMINAL
+            DIRECT MESSAGE TERMINAL
           </span>
-          <span className="font-silkscreen text-[7.5px] text-zinc-400">
+          <span className="font-mono text-[8px] text-zinc-400">
             ravisolanki969197@gmail.com
           </span>
         </div>

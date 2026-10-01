@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { PROJECTS } from '@/data/projects';
 import { sound } from '@/utils/audio';

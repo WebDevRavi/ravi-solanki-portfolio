@@ -1,15 +1,13 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { sound } from '@/utils/audio';
 
 export function VortexTunnelCanvas() {
   const tunnelGroupRef = useRef<THREE.Group>(null);
   const ringsRef = useRef<THREE.Mesh[]>([]);
   const pointerPos = useRef({ x: 0, y: 0 });
-  const [speed, setSpeed] = useState(65);
   const { invalidate } = useThree();
 
   const RING_COUNT = 30;

@@ -13,9 +13,8 @@ interface PortfolioNodeProps {
 }
 
 // Programmatic Pixel Art Icons in SVG
-const NodePixelIcon: React.FC<{ type: WorldNode['iconType']; color: string }> = ({
+const NodePixelIcon: React.FC<{ type: WorldNode['iconType']; color?: string }> = ({
   type,
-  color,
 }) => {
   switch (type) {
     case 'cube':
@@ -286,26 +285,30 @@ export const PortfolioNode: React.FC<PortfolioNodeProps> = ({
           )}
         </div>
 
-        {/* Node Label (Section 11: 8–14px vertical separation, small uppercase pixel typography) */}
+        {/* Node Label */}
         <div
-          className={`mt-3 transition-all duration-200 pointer-events-none z-20 whitespace-nowrap text-center ${
-            isHovered
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-75 translate-y-0.5'
+          className={`mt-2.5 transition-all duration-200 pointer-events-none z-20 whitespace-nowrap text-center ${
+            isHovered ? 'translate-y-0 scale-105' : 'translate-y-0.5 opacity-90'
           }`}
         >
           <div className="flex flex-col items-center">
             <p
-              className="font-pixel text-[8.5px] md:text-[9.5px] tracking-wider transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
+              className="font-pixel text-[9px] md:text-[10px] tracking-wider transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
               style={{ color: isHovered ? '#ffffff' : node.color }}
             >
               {node.title}
             </p>
-            {isHovered && (
-              <span className="font-silkscreen text-[7px] text-zinc-400 uppercase tracking-widest mt-0.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
-                {node.badge}
-              </span>
-            )}
+            <span
+              className="font-mono text-[7px] md:text-[7.5px] px-2 py-0.5 rounded-full mt-1 border backdrop-blur-sm transition-all"
+              style={{
+                backgroundColor: isHovered ? `${node.color}25` : 'rgba(7,5,20,0.75)',
+                borderColor: isHovered ? node.color : 'rgba(255,255,255,0.12)',
+                color: isHovered ? '#ffffff' : '#94a3b8',
+                boxShadow: isHovered ? `0 0 10px ${node.glowColor}` : 'none',
+              }}
+            >
+              {isHovered ? '✦ CLICK TO INSPECT ✦' : node.badge}
+            </span>
           </div>
         </div>
       </div>

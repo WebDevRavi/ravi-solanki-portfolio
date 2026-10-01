@@ -16,6 +16,7 @@ import { NodeDrawer } from './NodeDrawer';
 import { WorldHUD } from './WorldHUD';
 import { IntroScene } from './IntroScene';
 import { EndCharacter } from './EndCharacter';
+import { ShowcaseArchiveModal } from './ShowcaseArchiveModal';
 import { soundEngine } from './SoundManager';
 import { WORLD_NODES, WorldNode } from '@/data/world';
 
@@ -27,6 +28,7 @@ export const WorldScene: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedNode, setSelectedNode] = useState<WorldNode | null>(null);
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [isShowcaseOpen, setIsShowcaseOpen] = useState(false);
 
   // Resize and scroll tracking
   useEffect(() => {
@@ -162,13 +164,14 @@ export const WorldScene: React.FC = () => {
       className="relative w-full overflow-x-hidden bg-[#05030e] text-[#f8fafc]"
       style={{ height: `${dimensions.height}px` }}
     >
-      {/* 1. Top Minimal HUD Navigation (World Waypoints Menu & Sound Toggle) */}
+      {/* 1. Top Minimal HUD Navigation (World Waypoints Menu, Sound & Archive) */}
       <WorldHUD
         onScrollTo={handleScrollTo}
         onOpenAbout={() => {
           const aboutNode = WORLD_NODES.find((n) => n.id === 'about');
           if (aboutNode) handleNodeSelect(aboutNode);
         }}
+        onOpenShowcase={() => setIsShowcaseOpen(true)}
       />
 
       {/* 2. Deep Nocturnal Sky Background */}
@@ -193,6 +196,7 @@ export const WorldScene: React.FC = () => {
           const aboutNode = WORLD_NODES.find((n) => n.id === 'about');
           if (aboutNode) handleNodeSelect(aboutNode);
         }}
+        onOpenShowcase={() => setIsShowcaseOpen(true)}
       />
 
       {/* 8. Continuously Animated SVG Multi-strand Connection Strands with Hover Reactivity */}
@@ -258,33 +262,37 @@ export const WorldScene: React.FC = () => {
       >
         <button
           onClick={() => handleScrollTo('#contact-scene')}
-          className="flex items-center gap-2 p-2 sm:px-3 sm:py-1.5 rounded-full bg-[#080518]/90 border border-[#00d4ff]/50 hover:border-white shadow-[0_0_15px_rgba(0,212,255,0.3)] backdrop-blur-md transition-all hover:scale-105"
-          title="Jump to Transmission & Mailbox"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#080518]/90 border border-[#00d4ff]/40 hover:border-[#00d4ff] shadow-[0_0_15px_rgba(0,212,255,0.25)] backdrop-blur-md transition-all hover:scale-105"
+          title="Send a transmission to Ravi"
         >
-          <span className="text-[#00d4ff] text-xs">✉</span>
-          <span className="hidden sm:inline font-silkscreen text-[9px] text-zinc-300 group-hover:text-white">
-            ravisolanki969197@gmail.com
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00d4ff] opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00d4ff]" />
           </span>
-          <div className="w-5 h-5 flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" shapeRendering="crispEdges">
-              <rect x="3" y="6" width="16" height="12" fill="#0284c7" stroke="#38bdf8" strokeWidth="1" />
-              <polygon points="3,6 11,12 19,6" fill="#38bdf8" />
-              <rect x="17" y="3" width="3" height="5" fill="#ef4444" className="animate-pulse" />
-            </svg>
-          </div>
+          <span className="font-mono text-[10px] text-zinc-300 group-hover:text-white">
+            TRANSMISSION
+          </span>
+          <span className="text-[#00d4ff] text-xs">✉</span>
         </button>
       </aside>
 
-      {/* 14. Climax End Character: The Creator's Mind with Inflowing Connection Strands into Head Portal */}
+      {/* 14. Climax End Character: The Creator's Horizon */}
       <EndCharacter
         scrollY={scrollY}
         onSpeak={() => soundEngine.playClick()}
+        onReturnToTop={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       />
 
       {/* 15. Interactive Node Portfolio Inspection Drawer */}
       <NodeDrawer
         node={selectedNode}
         onClose={() => setSelectedNode(null)}
+      />
+
+      {/* 16. Full Interactive Project Archive & Showcase Modal */}
+      <ShowcaseArchiveModal
+        isOpen={isShowcaseOpen}
+        onClose={() => setIsShowcaseOpen(false)}
       />
     </div>
   );

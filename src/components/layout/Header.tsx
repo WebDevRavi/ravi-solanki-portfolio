@@ -54,7 +54,7 @@ export function Header() {
               RAVI SOLANKI
             </span>
             <span className="hidden font-mono text-[10px] tracking-wider text-[#6b7280] sm:inline-block">
-              // SYS.DEV
+              {"// SYS.DEV"}
             </span>
           </Link>
 

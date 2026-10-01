@@ -22,12 +22,17 @@ export const NodeDrawer: React.FC<NodeDrawerProps> = ({ node, onClose, onPlaySou
     setActiveMedia(src);
   };
 
+  const handleClose = () => {
+    onPlaySound?.();
+    onClose();
+  };
+
   if (!node) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       {/* Background click to dismiss */}
-      <div className="absolute inset-0" onClick={onClose} />
+      <div className="absolute inset-0" onClick={handleClose} />
 
       {/* Main Pixel Frame Window */}
       <div
