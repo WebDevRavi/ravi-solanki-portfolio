@@ -280,7 +280,6 @@ export const WorldScene: React.FC = () => {
       <EndCharacter
         scrollY={scrollY}
         onSpeak={() => soundEngine.playClick()}
-        onReturnToTop={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       />
 
       {/* 15. Interactive Node Portfolio Inspection Drawer */}

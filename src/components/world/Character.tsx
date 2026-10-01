@@ -13,31 +13,23 @@ export const Character: React.FC<CharacterProps> = ({ onSpeak, scrollProgress = 
   const [isInteracted, setIsInteracted] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [walkFrame, setWalkFrame] = useState(1);
 
   const startPointerRef = useRef({ x: 0, y: 0 });
   const startOffsetRef = useRef({ x: 0, y: 0 });
   const lastProgressRef = useRef(scrollProgress);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Dynamic walking animation frame cycle when user scrolls
+  // When user scrolls, smoothly reset manual drag offset so character follows as usual
   useEffect(() => {
-    const diff = Math.abs(scrollProgress - lastProgressRef.current);
-    if (diff > 0.05) {
-      setIsScrolling(true);
-      setWalkFrame((prev) => (prev % 4) + 1);
+    if (Math.abs(scrollProgress - lastProgressRef.current) > 0.4) {
       lastProgressRef.current = scrollProgress;
-
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+      if (!isDragging && (dragOffset.x !== 0 || dragOffset.y !== 0)) {
+        const timer = setTimeout(() => {
+          setDragOffset({ x: 0, y: 0 });
+        }, 0);
+        return () => clearTimeout(timer);
       }
-      scrollTimeoutRef.current = setTimeout(() => {
-        setIsScrolling(false);
-        setDragOffset((prev) => (prev.x !== 0 || prev.y !== 0 ? { x: 0, y: 0 } : prev));
-      }, 350);
     }
-  }, [scrollProgress]);
+  }, [scrollProgress, isDragging, dragOffset]);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -79,65 +71,42 @@ export const Character: React.FC<CharacterProps> = ({ onSpeak, scrollProgress = 
     }
   };
 
-  // Section-aware authentic human dialogue lines
+  // Dialogue lines per Section 18 & brand guidelines
   const getContextualThought = () => {
     if (isDragging) {
-      return 'MANUALLY EXPLORING THE PATH!';
+      return 'MANUALLY EXPLORING THE SPACE!';
     }
     if (dragOffset.x !== 0 || dragOffset.y !== 0) {
-      return 'PAUSED HERE. KEEP SCROLLING!';
+      return 'PAUSED HERE. SCROLL TO CONTINUE.';
     }
     if (isInteracted) {
       return 'BUILDING THINGS WHILE FIGURING THINGS OUT.';
     }
     if (scrollProgress < 6) {
-      return "HEY! I'M RAVI.\nEXPLORE MY WORK AS YOU SCROLL.";
+      return "WELCOME TO MY WORLD.\nLET'S HEAD DOWN THE PATH.";
     }
     if (scrollProgress < 18) {
-      return 'BLENDER VIEWPORT: LIGHTING & BRUTALIST FORMS.';
+      return 'SPATIAL FORMS, BLENDER LIGHTS, AND GAME PHYSICS.';
     }
-    if (scrollProgress < 28) {
-      return 'INTERACTIVE GAMES: VORTEX GLIDE & TYPERUSH!';
+    if (scrollProgress < 30) {
+      return 'FRAMES, CUTS, AND CINEMATIC ATMOSPHERE.';
     }
-    if (scrollProgress < 38) {
-      return 'DIRECTED & COLOR-GRADED 10 CINEMATIC FILMS.';
+    if (scrollProgress < 42) {
+      return 'DSA PROBLEM-SOLVING AND COMPUTATIONAL FOUNDATIONS.';
     }
-    if (scrollProgress < 46) {
-      return 'C++ & DSA: STRENGTHENING CS FOUNDATIONS.';
+    if (scrollProgress < 54) {
+      return 'CLIENT WEB BUILDS & 40K+ DIGITAL AUDIENCE.';
     }
-    if (scrollProgress < 56) {
-      return 'SHREEPLYS STOREFRONT & FREELANCE VIDEO WORK.';
+    if (scrollProgress < 68) {
+      return 'THE WORLD IS STILL AHEAD. SO MUCH LEFT TO SEE.';
     }
-    if (scrollProgress < 66) {
-      return 'BUILT A 40K+ DIGITAL MEDIA AUDIENCE.';
-    }
-    if (scrollProgress < 76) {
-      return 'MY LATE-NIGHT BHOPAL WORKSTATION.';
+    if (scrollProgress < 78) {
+      return 'THE STUDIO — WHERE LATE-NIGHT IDEAS GET BUILT.';
     }
     if (scrollProgress < 88) {
-      return 'TRANSMISSION: SEND A MESSAGE OR COLLABORATE!';
+      return 'TRANSMISSION POST. LET’S MAKE SOMETHING TOGETHER.';
     }
-    return "EVERY COMMIT & RENDER IS A STEP FORWARD.";
-  };
-
-  // Dynamic sprite asset selection
-  const getSpriteSrc = () => {
-    if (isScrolling) {
-      return `/assets/character/ravi-walk-${walkFrame}.png`;
-    }
-    if (scrollProgress >= 28 && scrollProgress < 42) {
-      return '/assets/character/ravi-camera.png';
-    }
-    if (scrollProgress >= 42 && scrollProgress < 50) {
-      return '/assets/character/ravi-think.png';
-    }
-    if (scrollProgress >= 50 && scrollProgress < 66) {
-      return '/assets/character/ravi-celebrate.png';
-    }
-    if (scrollProgress >= 70 && scrollProgress < 78) {
-      return '/assets/character/ravi-sit-laptop.png';
-    }
-    return '/assets/character/ravi-idle-1.png';
+    return 'ALL IDEAS FLOW TOGETHER INTO THE MIND.';
   };
 
   // Calculate smooth winding coordinates along the world path
@@ -181,7 +150,7 @@ export const Character: React.FC<CharacterProps> = ({ onSpeak, scrollProgress = 
         transform: `translate(calc(-50% + ${dragOffset.x}px), calc(-50% + ${dragOffset.y}px))`,
         transition: isDragging
           ? 'none'
-          : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.6s ease-out, top 0.6s ease-out',
+          : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), left 0.7s ease-out, top 0.7s ease-out',
       }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -189,9 +158,9 @@ export const Character: React.FC<CharacterProps> = ({ onSpeak, scrollProgress = 
       onClick={handleClick}
     >
       <div className={`flex flex-col items-center ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} group`}>
-        {/* Dialogue Box */}
+        {/* Dialogue Box per Section 18 */}
         <div
-          className={`relative mb-2 px-3 py-1.5 bg-[#070518]/95 border border-[#00d4ff]/40 rounded-lg shadow-[0_0_16px_rgba(0,212,255,0.25)] backdrop-blur-md transition-all duration-300 max-w-[220px] text-center pointer-events-none ${
+          className={`relative mb-2.5 px-3 py-1.5 bg-[#070518]/92 border border-[#00d4ff]/40 rounded shadow-[0_0_12px_rgba(0,212,255,0.2)] backdrop-blur-md transition-all duration-300 max-w-[210px] text-center pointer-events-none ${
             isDragging
               ? 'scale-105 border-[#00d4ff] bg-[#0c0827]'
               : isInteracted
@@ -202,39 +171,39 @@ export const Character: React.FC<CharacterProps> = ({ onSpeak, scrollProgress = 
           <p className="font-pixel text-[8px] sm:text-[8.5px] text-[#38bdf8] leading-tight whitespace-pre-line tracking-wider drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
             {getContextualThought()}
           </p>
-          <div className="flex items-center justify-center gap-1.5 mt-1 font-mono text-[7px] text-zinc-400">
+          <div className="flex items-center justify-center gap-1.5 mt-1 font-pixel text-[6.5px] text-zinc-400">
             <span>RAVI SOLANKI</span>
             <span className="text-zinc-600">·</span>
-            <span className="text-zinc-400">{isDragging ? 'DRAGGING' : isScrolling ? 'WALKING' : 'ONLINE'}</span>
+            <span className="text-zinc-400">{isDragging ? 'DRAGGING' : 'PROTAGONIST'}</span>
           </div>
           {/* Subtle triangle arrow pointing to character */}
-          <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[4px] border-t-[#00d4ff]/50" />
+          <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-0 h-0 border-l-[3.5px] border-l-transparent border-r-[3.5px] border-r-transparent border-t-[4px] border-t-[#00d4ff]/50" />
         </div>
 
-        {/* Dynamic Pixel Art Ravi Sprite */}
+        {/* Pixel Art Ravi Protagonist Sprite (55–90px height, Section 6) */}
         <div
           className="relative animate-node-float cursor-pointer select-none"
-          style={{ '--float-duration': '3.2s' } as React.CSSProperties}
+          style={{ '--float-duration': '3.4s' } as React.CSSProperties}
         >
           {/* Subtle ambient floor shadow */}
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-9 h-2.5 rounded-full bg-black/70 blur-[2px] pointer-events-none" />
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-2 rounded-full bg-black/60 blur-[2px] pointer-events-none" />
 
-          {/* Cyan/purple aura */}
+          {/* Subtle cyan/purple aura */}
           <div
             className={`absolute -inset-2 rounded-full blur-[10px] pointer-events-none transition-all duration-300 ${
-              isDragging ? 'bg-[#00d4ff]/35 scale-125' : 'bg-[#38bdf8]/20'
+              isDragging ? 'bg-[#00d4ff]/35 scale-120' : 'bg-[#38bdf8]/18'
             }`}
           />
 
-          {/* Dynamic Sprite Image */}
-          <div className="relative w-[52px] h-[78px] filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] transition-transform duration-200 group-hover:scale-110">
+          {/* 58x81px sprite — within 55-90px range per Section 6 */}
+          <div className="relative w-[58px] h-[81px] filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)] transition-transform duration-200 group-hover:scale-105">
             <Image
-              src={getSpriteSrc()}
-              alt="Ravi Solanki — Character"
-              width={52}
-              height={78}
+              src="/assets/character/floating-char.png"
+              alt="Ravi Solanki — Protagonist"
+              width={58}
+              height={81}
               className="w-full h-full object-contain pointer-events-none select-none"
-              style={{ imageRendering: 'pixelated' }}
+              style={{ imageRendering: 'pixelated', aspectRatio: '1062 / 1482' }}
               unoptimized
               priority
             />

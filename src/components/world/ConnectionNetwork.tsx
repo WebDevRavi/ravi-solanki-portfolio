@@ -97,11 +97,10 @@ export const ConnectionNetwork: React.FC<ConnectionNetworkProps> = ({
         // Analyzed hole in head coordinates in 594x650 sprite: X = 43.43%, Y = 14.77%
         const isEndCharacter = conn.to.id === 'end-character';
         if (isEndCharacter) {
-          const charW = isMobile ? 180 : 250;
-          const charH = isMobile ? 197 : 274;
-          const bottomOffset = isMobile ? 32 : 48;
+          const charW = isMobile ? 210 : 275;
+          const charH = isMobile ? 230 : 301;
           const charLeft = containerWidth * 0.5 - charW / 2;
-          const charTop = containerHeight - charH - bottomOffset;
+          const charTop = containerHeight - charH;
           x2 = charLeft + charW * 0.4343;
           y2 = charTop + charH * 0.1477;
         }
