@@ -1,33 +1,33 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { CustomPixelCursor } from '@/components/world/CustomPixelCursor';
 
 export const metadata: Metadata = {
-  title: 'Blue 3D — Ravi Solanki',
+  title: 'Ravi Solanki — AI/ML · Game Development',
   description:
-    'Creative and technical experiments by Ravi Solanki — exploring 3D, games, film, photography, code, and AI/ML.',
+    'Portfolio and technical projects by Ravi Solanki — Game Development, AI/ML, and Creative 3D.',
   keywords: [
     'Ravi Solanki',
-    'Blue 3D',
-    'Creative Developer',
-    'Blender 3D',
     'Game Development',
-    'Pixel Art World',
+    'AI/ML',
+    'Three.js',
+    'WebGL',
+    'Creative Developer',
     'CSE AIML',
+    'Bhopal',
   ],
   authors: [{ name: 'Ravi Solanki' }],
   metadataBase: new URL('https://ravisolanki.dev'),
   openGraph: {
-    title: 'Blue 3D — Ravi Solanki',
+    title: 'Ravi Solanki — AI/ML · Game Development',
     description:
-      'Creative and technical experiments by Ravi Solanki — exploring 3D, games, film, photography, code, and AI/ML.',
+      'Portfolio and technical projects by Ravi Solanki — Game Development, AI/ML, and Creative 3D.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blue 3D — Ravi Solanki',
+    title: 'Ravi Solanki — AI/ML · Game Development',
     description:
-      'Creative and technical experiments by Ravi Solanki — exploring 3D, games, film, photography, code, and AI/ML.',
+      'Portfolio and technical projects by Ravi Solanki — Game Development, AI/ML, and Creative 3D.',
   },
 };
 
@@ -39,10 +39,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased" suppressHydrationWarning>
       <body
-        className="min-h-full bg-[#080614] text-[#f8fafc] selection:bg-[#00d4ff] selection:text-[#080614]"
+        className="min-h-full bg-[#08070d] text-[#f8fafc] selection:bg-[#3b82f6] selection:text-white"
         suppressHydrationWarning
       >
-        <CustomPixelCursor />
         {children}
       </body>
     </html>

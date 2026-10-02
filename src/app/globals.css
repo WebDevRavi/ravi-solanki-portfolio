@@ -2,22 +2,22 @@
 @import "tailwindcss";
 
 :root {
-  --bg-night: #080614;
+  --bg-night: #08070d;
   --bg-sky-top: #05030e;
-  --bg-sky-mid: #100b2a;
-  --bg-sky-bottom: #26133f;
-  --blue-primary: #00d4ff;
-  --blue-glow: rgba(0, 212, 255, 0.4);
-  --blue-deep: #1e3a8a;
+  --bg-sky-mid: #0a0718;
+  --bg-sky-bottom: #120b22;
+  --blue-primary: #3b82f6;
+  --blue-glow: rgba(59, 130, 246, 0.2);
+  --blue-deep: #1d4ed8;
   --violet: #8b5cf6;
-  --violet-glow: rgba(139, 92, 246, 0.4);
+  --violet-glow: rgba(139, 92, 246, 0.2);
   --purple-soft: #c084fc;
   --pink-accent: #f472b6;
   --warm-amber: #f59e0b;
-  --warm-yellow: #fcd34d;
+  --warm-yellow: #FCDD0D;
   --text-primary: #f8fafc;
   --text-muted: #94a3b8;
-  --font-pixel: 'Press Start 2P', 'Silkscreen', monospace;
+  --font-pixel: 'Press Start 2P', monospace;
   --font-silkscreen: 'Silkscreen', monospace;
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'Inter', var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
@@ -59,16 +59,6 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-/* Custom Cursor: Hide native system cursor for pointer devices, but keep text cursor for inputs */
-@media (pointer: fine) {
-  *, *::before, *::after, html, body, a, button, [role="button"], .cursor-pointer, .cursor-grab, .cursor-grabbing {
-    cursor: none !important;
-  }
-  input, textarea, [contenteditable="true"] {
-    cursor: text !important;
-  }
 }
 
 /* Pixel Typography Utilities */

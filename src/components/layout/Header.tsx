@@ -39,45 +39,44 @@ export function Header() {
     sound.playClick(880, 0.04);
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#1f2228]/50 bg-[#08080a]/80 backdrop-blur-xl transition-all">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#08070d]/85 backdrop-blur-xl transition-all">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 md:px-12">
         {/* Left: Identity & Live Bhopal Clock */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link
             href="/"
             onClick={handleNavClick}
             className="group flex items-baseline gap-2.5"
             onMouseEnter={() => sound.playClick(1000, 0.02)}
           >
-            <span className="font-mono text-sm font-bold tracking-tight text-white transition-colors group-hover:text-[#FCDD0D]">
+            <span className="font-sans text-sm md:text-base font-bold tracking-tight text-white transition-colors group-hover:text-[#3b82f6]">
               RAVI SOLANKI
-            </span>
-            <span className="hidden font-mono text-[10px] tracking-wider text-[#6b7280] sm:inline-block">
-              {"// SYS.DEV"}
             </span>
           </Link>
 
-          {/* Bhopal Clock Pill */}
-          <div className="hidden items-center gap-2 border-l border-[#1f2228] pl-6 font-mono text-[11px] text-[#9ca3af] lg:flex">
+          {/* Bhopal Status Pill */}
+          <div className="hidden items-center gap-2 border-l border-white/10 pl-4 font-mono text-[11px] text-zinc-400 sm:flex">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            <span className="text-[#6b7280]">BHOPAL, IN:</span>
-            <span className="text-[#e5e7eb]" suppressHydrationWarning>
-              {time ? `${time} IST` : '--:--:--'}
+            <span className="text-zinc-500">BHOPAL, IN</span>
+            <span className="text-zinc-300 font-medium" suppressHydrationWarning>
+              {time ? `${time} IST` : ''}
             </span>
           </div>
         </div>
 
-        {/* Center: Tactile Editorial Navigation */}
-        <nav className="hidden items-center gap-6 md:flex">
+        {/* Center: Editorial Navigation */}
+        <nav className="hidden items-center gap-6 lg:flex">
           <Link
             href="/#games"
             onClick={handleNavClick}
             onMouseEnter={() => sound.playClick(1100, 0.015)}
-            className="font-mono text-xs tracking-wider text-[#9ca3af] transition-colors hover:text-[#4B7BFF]"
+            className="font-mono text-xs tracking-wider text-zinc-400 transition-colors hover:text-white"
           >
             01/GAMES
           </Link>
@@ -85,7 +84,7 @@ export function Header() {
             href="/#aiml"
             onClick={handleNavClick}
             onMouseEnter={() => sound.playClick(1100, 0.015)}
-            className="font-mono text-xs tracking-wider text-[#9ca3af] transition-colors hover:text-white"
+            className="font-mono text-xs tracking-wider text-zinc-400 transition-colors hover:text-white"
           >
             02/AI·ML
           </Link>
@@ -93,15 +92,15 @@ export function Header() {
             href="/#work"
             onClick={handleNavClick}
             onMouseEnter={() => sound.playClick(1100, 0.015)}
-            className="font-mono text-xs tracking-wider text-[#9ca3af] transition-colors hover:text-white"
+            className="font-mono text-xs tracking-wider text-zinc-400 transition-colors hover:text-white"
           >
-            03/WORK
+            03/CLIENT
           </Link>
           <Link
-            href="/#creative"
+            href="/#blue3d"
             onClick={handleNavClick}
             onMouseEnter={() => sound.playClick(1100, 0.015)}
-            className="font-mono text-xs tracking-wider text-[#9ca3af] transition-colors hover:text-[#FCDD0D]"
+            className="font-mono text-xs tracking-wider text-zinc-400 transition-colors hover:text-[#FCDD0D]"
           >
             04/BLUE3D
           </Link>
@@ -109,22 +108,30 @@ export function Header() {
             href="/#about"
             onClick={handleNavClick}
             onMouseEnter={() => sound.playClick(1100, 0.015)}
-            className="font-mono text-xs tracking-wider text-[#9ca3af] transition-colors hover:text-white"
+            className="font-mono text-xs tracking-wider text-zinc-400 transition-colors hover:text-white"
           >
             05/ABOUT
           </Link>
+          <Link
+            href="/#contact"
+            onClick={handleNavClick}
+            onMouseEnter={() => sound.playClick(1100, 0.015)}
+            className="font-mono text-xs tracking-wider text-zinc-400 transition-colors hover:text-[#3b82f6]"
+          >
+            06/CONTACT
+          </Link>
         </nav>
 
-        {/* Right: Sound Synthesizer Controller & External Terminal Links */}
-        <div className="flex items-center gap-4 font-mono text-xs">
+        {/* Right: Sound Synthesizer Controller & Source Links */}
+        <div className="flex items-center gap-3 font-mono text-xs">
           {/* Sound FX Switch */}
           <button
             onClick={handleSoundToggle}
             title="Toggle Web Audio Synthesizer"
             className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] transition-all ${
               soundEnabled
-                ? 'border-[#4B7BFF]/40 bg-[#4B7BFF]/10 text-[#4B7BFF] shadow-[0_0_10px_rgba(75,123,255,0.2)]'
-                : 'border-[#27272a] bg-[#141517] text-[#71717a]'
+                ? 'border-[#3b82f6]/40 bg-[#3b82f6]/10 text-[#3b82f6]'
+                : 'border-zinc-800 bg-zinc-900/60 text-zinc-500'
             }`}
           >
             <span className="text-[10px]">{soundEnabled ? '●' : '○'}</span>
@@ -137,7 +144,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleNavClick}
-            className="hidden text-[#9ca3af] transition-colors hover:text-white sm:inline-block"
+            className="hidden text-zinc-400 transition-colors hover:text-white sm:inline-block"
           >
             GH ↗
           </a>
@@ -146,12 +153,113 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleNavClick}
-            className="hidden text-[#9ca3af] transition-colors hover:text-white sm:inline-block"
+            className="hidden text-zinc-400 transition-colors hover:text-white sm:inline-block"
           >
             IN ↗
           </a>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-1.5 text-zinc-400 hover:text-white lg:hidden"
+            aria-label="Toggle Navigation Menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {mobileMenuOpen ? (
+                <path d="M18 6L6 18M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="border-t border-white/10 bg-[#08070d]/95 px-6 py-4 backdrop-blur-xl lg:hidden">
+          <nav className="flex flex-col gap-3 font-mono text-xs">
+            <Link
+              href="/#games"
+              onClick={() => {
+                handleNavClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-1 text-zinc-300 hover:text-white"
+            >
+              01/GAMES
+            </Link>
+            <Link
+              href="/#aiml"
+              onClick={() => {
+                handleNavClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-1 text-zinc-300 hover:text-white"
+            >
+              02/AI·ML
+            </Link>
+            <Link
+              href="/#work"
+              onClick={() => {
+                handleNavClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-1 text-zinc-300 hover:text-white"
+            >
+              03/CLIENT
+            </Link>
+            <Link
+              href="/#blue3d"
+              onClick={() => {
+                handleNavClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-1 text-zinc-300 hover:text-[#FCDD0D]"
+            >
+              04/BLUE3D
+            </Link>
+            <Link
+              href="/#about"
+              onClick={() => {
+                handleNavClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-1 text-zinc-300 hover:text-white"
+            >
+              05/ABOUT
+            </Link>
+            <Link
+              href="/#contact"
+              onClick={() => {
+                handleNavClick();
+                setMobileMenuOpen(false);
+              }}
+              className="py-1 text-zinc-300 hover:text-[#3b82f6]"
+            >
+              06/CONTACT
+            </Link>
+            <div className="flex items-center gap-4 pt-2 border-t border-white/10">
+              <a
+                href="https://github.com/WebDevRavi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-white"
+              >
+                GitHub ↗
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ravi-solanki-bb2420375/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-white"
+              >
+                LinkedIn ↗
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
