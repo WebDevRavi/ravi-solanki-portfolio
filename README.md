@@ -26,11 +26,12 @@
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 16](https://nextjs.org/) (App Router, Turbopack)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) & Canvas 2D
-- **Icons**: Lucide Icons
-- **Audio**: Native HTML5 Web Audio API
+- **Language**: [TypeScript 5](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **3D & Graphics**: [Three.js](https://threejs.org/) & [React Three Fiber](https://r3f.docs.pmnd.rs/) (`@react-three/drei`)
+- **Animations**: [GSAP](https://gsap.com/) & Canvas 2D
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Audio**: Native HTML5 Web Audio API (procedural synthesis)
 
 ---
 
@@ -63,11 +64,15 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the interactive world.
 
-### Production Build
+### Production Build & Linting
 
-Build and test optimized production bundles:
+Build and test optimized production bundles or run code quality validation:
 
 ```bash
+# Code quality check
+npm run lint
+
+# Production build
 npm run build
 npm run start
 ```
@@ -105,6 +110,8 @@ npm run start
 - **Brand**: Blue 3D
 - **Email**: [ravisolanki969197@gmail.com](mailto:ravisolanki969197@gmail.com)
 - **GitHub**: [@WebDevRavi](https://github.com/WebDevRavi)
+- **LeetCode**: [ravisolanki_](https://leetcode.com/u/ravisolanki_/)
+- **HackerRank**: [@ravisolanki96911](https://www.hackerrank.com/profile/ravisolanki96911)
 - **Instagram**: [@blue3d_](https://www.instagram.com/blue3d_/) · [@ravi_solanki_1567](https://www.instagram.com/ravi_solanki_1567/)
 
 ---

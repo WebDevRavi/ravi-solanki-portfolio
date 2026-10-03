@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
 import { sound } from '@/utils/audio';
 
 export const VortexGlideFeature: React.FC = () => {
@@ -130,14 +131,14 @@ export const VortexGlideFeature: React.FC = () => {
             <span className="text-zinc-500">↗</span>
           </a>
 
-          <a
+          <Link
             href="/games/vortex-glide"
             onClick={() => sound.playClick(880, 0.02)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/[0.05] text-zinc-200 border border-white/10 font-sans text-xs sm:text-sm font-medium hover:bg-white/[0.1] hover:text-white transition-all"
           >
             <span>Project Details</span>
             <span className="text-zinc-400">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
